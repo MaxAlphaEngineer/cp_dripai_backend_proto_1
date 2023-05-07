@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'v1'
 ]
 
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,6 +74,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cp_dripai_backend_proto_1.wsgi.application'
 
+
+AUTH_USER_MODEL = "v1.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
