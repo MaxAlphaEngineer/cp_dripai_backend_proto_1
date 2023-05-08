@@ -37,8 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'v1'
+    'v1',
+    'channels',
+
+    'rest_framework.authtoken'
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+WeatherAPIToken = '6e9369cca60c4c57a02130627230805'
 
 ROOT_URLCONF = 'cp_dripai_backend_proto_1.urls'
 
@@ -71,6 +79,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cp_dripai_backend_proto_1.wsgi.application'
 
+
+AUTH_USER_MODEL = "v1.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -123,3 +133,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ASGI_APPLICATION = "cp_dripai_backend_proto_1.asgi.application"
+APP_NAME = 'CP DriPai Backend'
