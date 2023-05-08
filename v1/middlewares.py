@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from rest_framework_simplejwt.tokens import AccessToken, TokenError
 
+
 User = get_user_model()
 
 
@@ -18,6 +19,7 @@ def get_user(user_id):
 
 class WebSocketJWTAuthMiddleware:
 
+
     def __init__(self, app):
         self.app = app
 
@@ -30,5 +32,6 @@ class WebSocketJWTAuthMiddleware:
             scope["user"] = await get_user(access_token["user_id"])
         except TokenError:
             scope["user"] = AnonymousUser()
+
 
         return await self.app(scope, receive, send)

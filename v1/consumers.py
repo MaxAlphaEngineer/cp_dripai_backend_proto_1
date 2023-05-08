@@ -10,6 +10,7 @@ from models.massage import Message
 class ChatConsumer(AsyncWebsocketConsumer):
     groups = ["general"]
 
+
     async def connect(self):
         await self.accept()
         if self.scope["user"] is not AnonymousUser:
@@ -24,6 +25,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         last_msg = await self.get_last_message(self.user_id)
         last_msg["status"] = event["text"]
         await self.send(text_data=json.dumps(last_msg))
+
 
     @database_sync_to_async
     def get_last_message(self, user_id):

@@ -5,4 +5,5 @@ User = get_user_model()
 
 class Message(models.Model):
     message = models.JSONField()
+
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True, blank=True)
