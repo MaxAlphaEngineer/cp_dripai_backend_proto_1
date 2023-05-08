@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+WeatherAPIToken = '6e9369cca60c4c57a02130627230805'
+
 ROOT_URLCONF = 'cp_dripai_backend_proto_1.urls'
 
 TEMPLATES = [
