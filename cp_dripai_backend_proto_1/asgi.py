@@ -1,12 +1,16 @@
-
 import os
-import django
-from channels.http import AsgiHandler
-from channels.routing import ProtocolTypeRouter, get_default_application
+
+from v1.middlewares import WebSocketJWTAuthMiddleware
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.core.asgi import get_asgi_application
+from v1 import routing
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_ws.settings")
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cp_dripai_backend_proto_1.settings')
-django.setup()
-
-
-application = get_default_application()
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+        "websocket": WebSocketJWTAuthMiddleware(URLRouter(routing.websocket_urlpatterns)),
+    }
+)

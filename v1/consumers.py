@@ -1,31 +1,31 @@
-import asyncio
 import json
-from channels.consumer import AsyncConsumer
-from random import randint
-from time import sleep
+
+from channels.db import database_sync_to_async
+from channels.generic.websocket import AsyncWebsocketConsumer
+from django.contrib.auth.models import AnonymousUser
+
+from models.massage import Message
 
 
-class PracticeConsumer(AsyncConsumer):
+class ChatConsumer(AsyncWebsocketConsumer):
+    groups = ["general"]
 
-    async def websocket_connect(self, event):
-        # when websocket connects
-        print("connected", event)
+    async def connect(self):
+        await self.accept()
+        if self.scope["user"] is not AnonymousUser:
+            self.user_id = self.scope["user"].id
+            await self.channel_layer.group_add(f"{self.user_id}-message", self.channel_name)
 
-        await self.send({"type": "websocket.accept",
-                         })
+    async def send_info_to_user_group(self, event):
+        message = event["text"]
+        await self.send(text_data=json.dumps(message))
 
-        await self.send({"type": "websocket.send",
-                         "text": 0})
+    async def send_last_message(self, event):
+        last_msg = await self.get_last_message(self.user_id)
+        last_msg["status"] = event["text"]
+        await self.send(text_data=json.dumps(last_msg))
 
-    async def websocket_receive(self, event):
-        # when messages is received from websocket
-        print("receive", event)
-
-        sleep(1)
-
-        await self.send({"type": "websocket.send",
-                         "text": str(randint(0, 100))})
-
-    async def websocket_disconnect(self, event):
-        # when websocket disconnects
-        print("disconnected", event)
+    @database_sync_to_async
+    def get_last_message(self, user_id):
+        message = Message.objects.filter(user_id=user_id).last()
+        return message.message
