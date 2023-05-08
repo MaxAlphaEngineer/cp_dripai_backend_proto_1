@@ -12,7 +12,7 @@ unit = r.html.find('div.vk_bk.wob-unit span.wob_t', first=True).text
 desc = r.html.find('div.VQF4g', first=True). find('span#wob_dc', first=True).text
 
 
-print(temp, unit, desc, user_input)
+print( temp, unit, desc, user_input )
 
 
 
