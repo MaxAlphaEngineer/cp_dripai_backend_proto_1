@@ -65,7 +65,7 @@ class LoginView(GenericAPIView):
             })
         if not user.check_password(data['password']):
             return Response({
-                "Error": "Password ERROR    "
+                "Error": "Password ERROR"
             })
 
         token = Token.objects.get_or_create(user=user)[0]
