@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'v1',
-    'channels'
+    'channels',
+
+    'rest_framework.authtoken'
 ]
 
 
@@ -131,3 +133,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ASGI_APPLICATION = "cp_dripai_backend_proto_1.asgi.application"
+APP_NAME = 'CP DriPai Backend'
