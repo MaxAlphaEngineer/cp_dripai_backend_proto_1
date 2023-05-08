@@ -18,6 +18,11 @@ def sensor_add(requests, params):
     if not params['sensors']:
         return custom_response(False, message={"Error": "List is empty"})
 
+def sensor_two(requests, params):
+    a={
+        "asfadkmg"
+    }
+    return custom_response(True, data=a)
 
 
 
