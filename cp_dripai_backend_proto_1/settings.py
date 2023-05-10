@@ -37,9 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'v1',
     'channels',
-
+    'v1',
     'rest_framework.authtoken'
 ]
 
@@ -78,7 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cp_dripai_backend_proto_1.wsgi.application'
-
+ASGI_APPLICATION = "cp_dripai_backend_proto_1.asgi.application"
 
 AUTH_USER_MODEL = "v1.User"
 
@@ -134,5 +133,28 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ASGI_APPLICATION = "cp_dripai_backend_proto_1.asgi.application"
-APP_NAME = 'CP DriPai Backend'
+
+
+# APP_NAME = 'CP DriPai Backend'
+
+CHANNEL_LAYERS = {
+    'default': {
+        ### Method 1: Via redis lab
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     "hosts": [
+        #       'redis://h:<password>;@<redis Endpoint>:<port>'
+        #     ],
+        # },
+
+        ## Method 2: Via local Redis
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     "hosts": [('127.0.0.1', 6379)],
+        # },
+
+        ### Method 3: Via In-memory channel layer
+        ## Using this method.
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}

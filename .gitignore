@@ -40,6 +40,11 @@ media
 # File-based project format
 *.iws
 
+
+Pipfile
+Pipfile.lock
+db.sqlite3
+
 # IntelliJ
 out/
 

@@ -1,8 +1,7 @@
-from django.urls import re_path
-
-from . import consumers
+from django.urls import path
+from v1.consumers import TicTacToeConsumer
 
 websocket_urlpatterns = [
-    re_path(r'msg/', consumers.ChatConsumer.as_asgi()),
-
+    # url(r'^ws/play/(?P<room_code>\w+)/$', TicTacToeConsumer.as_asgi()),
+    path('api/sensor', TicTacToeConsumer.as_asgi()),
 ]
