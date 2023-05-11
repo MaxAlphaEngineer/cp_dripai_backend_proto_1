@@ -7,4 +7,3 @@ class SensorData(models.Model):
     name = models.CharField(max_length=128)
     value = models.SmallIntegerField()
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-
