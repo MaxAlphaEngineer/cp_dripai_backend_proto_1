@@ -7,7 +7,7 @@ from cp_dripai_backend_proto_1.settings import WeatherAPIToken
 def weather_current(req, params):
     url = 'https://api.weatherapi.com/v1/current.json'
     token = WeatherAPIToken
-    response = requests.post(url+"?key="+token+"&q="+params['q'])
+    response = requests.post(url + "?key=" + token + "&q=" + params['q'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -17,7 +17,10 @@ def weather_current(req, params):
 def weather_forecast(raq, params):
     url = 'https://api.weatherapi.com/v1/forecast.json'
     token = WeatherAPIToken
-    response = requests.post(url+"?key="+token+"&q="+params['q'] + "&days="+params['days'] + "&dt="+ params['dt'] + "&hour=" + params['h'] + "&lang=" + params['lang'] + "&alerts=" + params['al'] + "&aqi=" + params['aq'] + "&tp=" + params['tp'])
+    response = requests.post(
+        url + "?key=" + token + "&q=" + params['q'] + "&days=" + params['days'] + "&dt=" + params['dt'] + "&hour=" +
+        params['h'] + "&lang=" + params['lang'] + "&alerts=" + params['al'] + "&aqi=" + params['aq'] + "&tp=" + params[
+            'tp'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -27,16 +30,20 @@ def weather_forecast(raq, params):
 def weather_future(raq, params):
     url = 'https://api.weatherapi.com/v1/future.json'
     token = WeatherAPIToken
-    response = requests.post(url + "?key=" + token + "&q=" + params['q'] + "&dt="+params['days'] + "&lang=" + params['lang'] )
+    response = requests.post(
+        url + "?key=" + token + "&q=" + params['q'] + "&dt=" + params['days'] + "&lang=" + params['lang'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
         return custom_response(False, message=response.text)
 
+
 def weather_history(raq, params):
     url = 'https://api.weatherapi.com/v1/history.json'
     token = WeatherAPIToken
-    response = requests.post(url+"?key="+token+"&q="+params['q'] + "&dt=" + params['dt'] +  "&unixdt" + params['unixdt'] + "&end_dt" +  params['enddt'] + "&hour=" + params['h'])
+    response = requests.post(
+        url + "?key=" + token + "&q=" + params['q'] + "&dt=" + params['dt'] + "&unixdt" + params['unixdt'] + "&end_dt" +
+        params['enddt'] + "&hour=" + params['h'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -46,7 +53,9 @@ def weather_history(raq, params):
 def weather_marine(req, params):
     url = 'https://api.weatherapi.com/v1/marine.json'
     token = WeatherAPIToken
-    response = requests.post(url + "?key=" + token + "&q=" + params['q'] +  "&days="+params['days'] +  "&dt=" + params['dt'] +  "&unixdt" + params['unixdt'] + "&hour=" + params['h'] + "&lang=" + params['lang'])
+    response = requests.post(
+        url + "?key=" + token + "&q=" + params['q'] + "&days=" + params['days'] + "&dt=" + params['dt'] + "&unixdt" +
+        params['unixdt'] + "&hour=" + params['h'] + "&lang=" + params['lang'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -81,19 +90,3 @@ def weather_astronomy(req, params):
         return custom_response(True, data=response.json())
     else:
         return custom_response(False, message=response.text)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
