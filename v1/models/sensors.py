@@ -1,5 +1,5 @@
 from django.db import models
-from v1.models.geo import Region, District
+from v1.models.geo import  District
 
 
 class SensorData(models.Model):
