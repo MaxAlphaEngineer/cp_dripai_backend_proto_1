@@ -27,7 +27,7 @@ def weather_forecast(raq, params):
 def weather_future(raq, params):
     url = 'https://api.weatherapi.com/v1/future.json'
     token = WeatherAPIToken
-    response = requests.post(url + "?key=" + token + "&q=" + params['q'] + "&days="+params['days'] + "&lang=" + params['lang'] )
+    response = requests.post(url + "?key=" + token + "&q=" + params['q'] + "&dt="+params['days'] + "&lang=" + params['lang'] )
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -43,7 +43,7 @@ def weather_history(raq, params):
         return custom_response(False, message=response.text)
 
 
-def eather_marine(req, params):
+def weather_marine(req, params):
     url = 'https://api.weatherapi.com/v1/marine.json'
     token = WeatherAPIToken
     response = requests.post(url + "?key=" + token + "&q=" + params['q'] +  "&days="+params['days'] +  "&dt=" + params['dt'] +  "&unixdt" + params['unixdt'] + "&hour=" + params['h'] + "&lang=" + params['lang'])
@@ -56,7 +56,7 @@ def eather_marine(req, params):
 def weather_search(req, params):
     url = 'https://api.weatherapi.com/v1/search.json'
     token = WeatherAPIToken
-    response = (url + "?key=" + token + "&q=" + params['q'])
+    response = requests.post(url + "?key=" + token + "&q=" + params['q'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -66,7 +66,7 @@ def weather_search(req, params):
 def weather_timzone(req, params):
     url = 'https://api.weatherapi.com/v1/timezone.json'
     token = WeatherAPIToken
-    response = (url + "?key=" + token + "&q=" + params['q'])
+    response = requests.post(url + "?key=" + token + "&q=" + params['q'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
@@ -76,7 +76,7 @@ def weather_timzone(req, params):
 def weather_astronomy(req, params):
     url = 'https://api.weatherapi.com/v1/astronomy.json'
     token = WeatherAPIToken
-    response = (url + "?key=" + token + "&q=" + params['q'] + "&dt=" + params['dt'])
+    response = requests.post(url + "?key=" + token + "&q=" + params['q'] + "&dt=" + params['dt'])
     if response.status_code == 200:
         return custom_response(True, data=response.json())
     else:
