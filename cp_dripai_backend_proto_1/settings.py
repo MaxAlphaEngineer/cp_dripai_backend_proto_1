@@ -135,7 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-# APP_NAME = 'CP DriPai Backend'
+APP_NAME = 'CP DriPai Backend'
 
 CHANNEL_LAYERS = {
     'default': {
