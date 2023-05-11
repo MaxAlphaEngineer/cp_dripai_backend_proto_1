@@ -40,3 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         return  self.name, self.mobile
 
 
+    def format(self):
+        return {
+            "user_name":self.name,
+
+        }
