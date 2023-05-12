@@ -2,6 +2,7 @@ import requests
 from methodism.helper import custom_response
 
 from cp_dripai_backend_proto_1.settings import WeatherAPIToken
+from v1.models.weather import Weather
 
 
 def weather_current(req, params):
@@ -14,7 +15,7 @@ def weather_current(req, params):
         return custom_response(False, message=response.text)
 
 
-def weather_forecast(raq, params):
+def weather_forecast(req, params):
     url = 'https://api.weatherapi.com/v1/forecast.json'
     token = WeatherAPIToken
     response = requests.post(
@@ -22,7 +23,11 @@ def weather_forecast(raq, params):
         params['h'] + "&lang=" + params['lang'] + "&alerts=" + params['al'] + "&aqi=" + params['aq'] + "&tp=" + params[
             'tp'])
     if response.status_code == 200:
-        return custom_response(True, data=response.json())
+        res = response.json()
+        forecast = Weather.objects.create(user=req.user, location=res.get('location', {}), current=res.get('current', {}),
+                            forecast=res.get('forecast', {}))
+
+        return custom_response(True, data=forecast.response())
     else:
         return custom_response(False, message=response.text)
 
