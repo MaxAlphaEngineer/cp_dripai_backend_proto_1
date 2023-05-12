@@ -17,3 +17,9 @@ def sensor_add(requests, params):
 
     if not params['sensors']:
         return custom_response(False, message={"Error": "List is empty"})
+
+    data = requests.data
+    sensordata = SensorData.objects.create(sensor_id=data['sensors'], name=data['name'])
+    sensordata.save()
+
+    return custom_response(True, data={"Success":"Data added "})
