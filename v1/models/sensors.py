@@ -9,3 +9,6 @@ class SensorData(models.Model):
     tuproq_nam2 = models.JSONField()
     havo_nam = models.JSONField()
     havo_temp = models.JSONField()
+
+    def __str__(self):
+        return self.sensor_id, self.name
